@@ -80,12 +80,14 @@
     .scene .voile-photo{inset:auto 0 auto 0;top:0;height:calc((100vw) * 654 / 1254);background:linear-gradient(180deg, transparent 55%, var(--bordeaux-ombre) 100%)}
     .accueil{margin:0 auto;padding-block:28px 48px;text-align:center;align-items:center}
     .accueil .actions{justify-content:center}
+    .rassure{letter-spacing:.1em;font-size:10.5px}
   }
   .petit-titre{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--or-rose)}
   .accueil .petit-titre{color:#E7C9A8}
   .accueil h1{font-size:clamp(32px,6.4vw,56px);color:var(--ivoire);text-shadow:0 2px 24px rgba(30,4,10,.5)}
   .accueil h1 em{font-style:italic;color:var(--rose-poudre);display:block;margin-top:.1em}
   .poeme{display:flex;flex-direction:column;gap:4px;color:rgba(251,244,241,.9);font-size:clamp(15px,2.2vw,17px);text-shadow:0 1px 12px rgba(30,4,10,.6)}
+  .poeme p{text-wrap:balance}
   .poeme .question{font-size:1.12em;color:var(--ivoire)}
   .poeme strong{font-weight:400;color:var(--rose-poudre);font-family:var(--titre);font-style:italic;font-size:1.15em}
   .rassure{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,244,241,.7);line-height:2;margin-top:4px}
@@ -169,7 +171,7 @@
   .coordonnees{display:flex;flex-direction:column;gap:14px}
   .ligne{display:flex;align-items:center;gap:14px;min-height:60px;padding:10px 18px 10px 10px;border-radius:999px;text-decoration:none;color:var(--encre);background:rgba(251,244,241,.8);border:1px solid rgba(176,137,96,.45);transition:transform .25s ease}
   .ligne:hover{transform:translateY(-2px)}
-  .ligne .icone{width:42px;height:42px;flex:none}
+  .ligne .icone{width:42px;height:42px;flex:none;display:grid;place-items:center}
   .ligne .icone svg{width:20px;height:20px}
   .ligne span{display:flex;flex-direction:column;line-height:1.4;min-width:0}
   .ligne b{font-family:var(--titre);font-weight:500;font-size:16px}
