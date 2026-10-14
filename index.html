@@ -35,40 +35,19 @@
   :focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px}
 
   /* ---------- Le rideau qui se lève à l'arrivée ---------- */
-  /* Rideaux de velours, façon vieux manoir : plis profonds, reflets, lambrequin festonné et galon doré */
-  .lever{position:fixed;inset:0;z-index:50;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse 50% 60% at 50% 40%, rgba(255,214,170,.25), transparent 70%);animation:eteindre .6s ease 2.5s forwards}
-  .pan{position:absolute;top:0;bottom:0;width:51%;
-    background:
-      radial-gradient(ellipse 60% 40% at 50% 38%, rgba(255,170,185,.10), transparent 70%),
-      linear-gradient(180deg, rgba(0,0,0,.5) 0%, transparent 16%, transparent 72%, rgba(0,0,0,.55) 100%),
-      repeating-linear-gradient(90deg, rgba(0,0,0,0) 0, rgba(0,0,0,.28) 47px, rgba(0,0,0,0) 94px, rgba(255,235,240,.05) 118px, rgba(0,0,0,0) 141px),
-      repeating-linear-gradient(90deg, #2a050c 0px, #46091a 9px, #721829 21px, #9c3249 29px, #b8495f 32px, #8a2539 37px, #5a0f20 50px, #33060f 63px, #3e0915 72px, #2a050c 84px);
-    animation-duration:2.1s;animation-timing-function:cubic-bezier(.65,0,.25,1);animation-delay:.7s;animation-fill-mode:forwards}
-  .pan::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");mix-blend-mode:overlay;opacity:.55}
-  .pan::after{content:"";position:absolute;top:0;bottom:0;width:14px;
-    background:linear-gradient(90deg, #6e4a26, #e3c48f 35%, #b08960 55%, #7a5530 100%);box-shadow:0 0 18px rgba(0,0,0,.5)}
-  .pan.g{left:0;transform-origin:left center;animation-name:ouvrir-g;box-shadow:12px 0 40px rgba(0,0,0,.55)}
-  .pan.g::after{right:0}
-  .pan.d{right:0;transform-origin:right center;animation-name:ouvrir-d;box-shadow:-12px 0 40px rgba(0,0,0,.55)}
-  .pan.d::after{left:0}
-  .lambrequin{position:absolute;left:0;right:0;top:0;height:clamp(64px,11vh,110px);z-index:2;
-    background:
-      linear-gradient(180deg, rgba(0,0,0,.45), transparent 45%, rgba(0,0,0,.3)),
-      repeating-linear-gradient(90deg, #3e0915 0, #7a1a2f 14px, #a33a50 20px, #6b1427 30px, #3e0915 44px);
-    box-shadow:0 6px 18px rgba(0,0,0,.5);animation:monter 1.4s cubic-bezier(.65,0,.25,1) 1.9s forwards}
-  .lambrequin::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");mix-blend-mode:overlay;opacity:.5}
-  .lambrequin .galon{position:absolute;left:0;right:0;bottom:14px;height:6px;background:repeating-linear-gradient(90deg,#7a5530 0,#e3c48f 4px,#b08960 8px,#7a5530 12px);box-shadow:0 1px 3px rgba(0,0,0,.5)}
-  .lambrequin .festons{position:absolute;left:0;right:0;top:100%;height:34px;
-    background:repeating-linear-gradient(90deg, #3e0915 0, #7a1a2f 14px, #a33a50 20px, #6b1427 30px, #3e0915 44px);
-    -webkit-mask:radial-gradient(60px 34px at 60px 0, #000 98%, transparent 100%) 0 0/120px 100% repeat-x;
-            mask:radial-gradient(60px 34px at 60px 0, #000 98%, transparent 100%) 0 0/120px 100% repeat-x;
-    filter:drop-shadow(0 3px 0 #b08960) drop-shadow(0 6px 8px rgba(0,0,0,.45))}
-  .lambrequin .festons-or{position:absolute;left:0;right:0;top:100%;height:40px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4))}
-  .lambrequin .festons-or::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#b08960,#e3c48f,#b08960);
-    -webkit-mask:radial-gradient(62px 40px at 60px 0, #000 98%, transparent 100%) 0 0/120px 100% repeat-x;
-            mask:radial-gradient(62px 40px at 60px 0, #000 98%, transparent 100%) 0 0/120px 100% repeat-x}
-  @keyframes ouvrir-g{to{transform:translateX(-96%) scaleX(.55)}}
-  @keyframes ouvrir-d{to{transform:translateX(96%) scaleX(.55)}}
+  /* Rideaux de velours réalistes (texture ombrée), lambrequin à festons et frange dorée */
+  .lever{position:fixed;inset:0;z-index:50;pointer-events:none;overflow:hidden;background:#1a0307;animation:eteindre .8s ease 2.4s forwards}
+  .pan{position:absolute;top:0;bottom:0;width:51%;overflow:hidden;
+    animation-duration:2.2s;animation-timing-function:cubic-bezier(.65,0,.25,1);animation-delay:.8s;animation-fill-mode:forwards}
+  .pan::before{content:"";position:absolute;inset:0;background:url(images/rideau-velours.webp) center top/auto 100% repeat-x}
+  .pan.d::before{transform:scaleX(-1)}
+  .pan.g{left:0;transform-origin:left center;animation-name:ouvrir-g;box-shadow:18px 0 40px rgba(0,0,0,.6)}
+  .pan.d{right:0;transform-origin:right center;animation-name:ouvrir-d;box-shadow:-18px 0 40px rgba(0,0,0,.6)}
+  .lambrequin{position:absolute;left:0;right:0;top:0;height:clamp(100px,15vh,160px);z-index:2;
+    background:url(images/lambrequin-velours.webp) center top/auto 100% repeat-x;filter:drop-shadow(0 10px 14px rgba(0,0,0,.5));
+    animation:monter 1.4s cubic-bezier(.65,0,.25,1) 2s forwards}
+  @keyframes ouvrir-g{to{transform:translateX(-92%) scaleX(.5)}}
+  @keyframes ouvrir-d{to{transform:translateX(92%) scaleX(.5)}}
   @keyframes monter{to{transform:translateY(-130%)}}
   @keyframes eteindre{to{background:transparent}}
 
@@ -90,13 +69,18 @@
   /* ---------- Accueil : la scène ---------- */
   /* Fond : la vraie photo du bureau, voilée de bordeaux pour que le texte reste lisible */
   .scene{position:relative;overflow:hidden;min-height:calc(100vh - 64px);min-height:calc(100svh - 64px);display:grid;place-items:center;background:var(--bordeaux-ombre)}
-  .scene .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:55% 40%;transform:scale(1.04);animation:respire 18s ease-in-out infinite alternate}
-  .scene .voile-photo{position:absolute;inset:0;background:
-      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(40,6,14,.55), rgba(40,6,14,.25) 70%, transparent),
-      linear-gradient(180deg, rgba(40,6,14,.55) 0%, rgba(40,6,14,.35) 40%, rgba(40,6,14,.7) 100%)}
-  @keyframes respire{to{transform:scale(1.1)}}
-  @media (max-width:600px){.scene .voile-photo{background:rgba(40,6,14,.62)}}
-  .accueil{position:relative;z-index:2;width:min(660px, calc(100% - 32px));padding-block:64px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;color:var(--ivoire)}
+  .scene .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%}
+  .scene .voile-photo{position:absolute;inset:0;background:linear-gradient(90deg, rgba(40,6,14,.92) 0%, rgba(40,6,14,.78) 38%, rgba(40,6,14,.15) 70%, transparent 100%)}
+  .scene{place-items:center start}
+  .accueil{position:relative;z-index:2;width:min(560px, calc(100% - 32px));margin-left:max(16px, calc((100% - 1080px) / 2));padding-block:64px;text-align:left;display:flex;flex-direction:column;align-items:flex-start;gap:20px;color:var(--ivoire)}
+  .accueil .actions{justify-content:flex-start}
+  @media (max-width:760px){
+    .scene{display:block;min-height:0}
+    .scene .photo{position:relative;display:block;height:auto;aspect-ratio:1254/654;object-position:center}
+    .scene .voile-photo{inset:auto 0 auto 0;top:0;height:calc((100vw) * 654 / 1254);background:linear-gradient(180deg, transparent 55%, var(--bordeaux-ombre) 100%)}
+    .accueil{margin:0 auto;padding-block:28px 48px;text-align:center;align-items:center}
+    .accueil .actions{justify-content:center}
+  }
   .petit-titre{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--or-rose)}
   .accueil .petit-titre{color:#E7C9A8}
   .accueil h1{font-size:clamp(32px,6.4vw,56px);color:var(--ivoire);text-shadow:0 2px 24px rgba(30,4,10,.5)}
@@ -233,7 +217,6 @@
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .lever{display:none}
-    .scene .photo{animation:none}
     .reveler{opacity:1;transform:none;transition:none}
     .carte,.bouton,.ligne{transition:none}
   }
@@ -243,7 +226,7 @@
 
 <div class="lever" aria-hidden="true">
   <div class="pan g"></div><div class="pan d"></div>
-  <div class="lambrequin"><span class="galon"></span><span class="festons-or"></span><span class="festons"></span></div>
+  <div class="lambrequin"></div>
 </div>
 
 <header>
