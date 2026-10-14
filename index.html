@@ -453,7 +453,7 @@
           </fieldset>
           <label>Votre besoin<textarea name="message" placeholder="Parlez-moi de votre activité et de ce qui vous ferait gagner du temps…"></textarea></label>
           <button class="bouton" type="submit">Envoyer ma demande</button>
-          <p class="aide" id="aide-form">En cliquant, votre messagerie s'ouvre avec votre demande déjà rédigée : il ne vous reste qu'à l'envoyer.</p>
+          <p class="aide" id="aide-form">Votre demande m'arrive directement. Je vous réponds très vite.</p>
         </form>
       </div>
     </div>
@@ -492,7 +492,7 @@
         </div>
         <div>
           <h4>Données personnelles</h4>
-          <p>Ce site ne dépose aucun cookie publicitaire et n'enregistre aucune donnée. Les informations que vous envoyez par e-mail servent uniquement à répondre à votre demande et ne sont jamais transmises à des tiers. Vous pouvez demander à tout moment leur consultation ou leur suppression en écrivant à dlea.digitalservices@gmail.com.</p>
+          <p>Ce site ne dépose aucun cookie publicitaire. Les informations envoyées par le formulaire de devis passent par le service Formspree (États-Unis), qui me les transmet par e-mail. Elles servent uniquement à répondre à votre demande et ne sont jamais vendues ni cédées à des tiers. Vous pouvez demander à tout moment leur consultation ou leur suppression en écrivant à dlea.digitalservices@gmail.com.</p>
         </div>
         <div>
           <h4>Éditrice et directrice de la publication</h4>
@@ -532,7 +532,7 @@
     loupe.querySelector('.fermer').addEventListener('click',function(){ loupe.close(); });
     loupe.addEventListener('click',function(e){ if(e.target===loupe) loupe.close(); });
 
-    // Formulaire de devis : prépare un e-mail
+    // Formulaire de devis : envoi direct via Formspree
     var form=document.getElementById('devis'), aide=document.getElementById('aide-form');
     form.addEventListener('submit',function(ev){
       ev.preventDefault();
@@ -544,20 +544,26 @@
         return;
       }
       var services=d.getAll('service');
-      var corps=[
-        'Bonjour,','',
-        'Je souhaite recevoir un devis.','',
-        'Nom : '+nom,
-        'Activité : '+(d.get('activite')||'-'),
-        'E-mail : '+email,
-        'Téléphone : '+(d.get('tel')||'-'),
-        'Services : '+(services.length?services.join(', '):'-'),'',
-        'Mon besoin :',(d.get('message')||'-'),'',
-        'Merci !'
-      ].join('\n');
-      window.location.href='mailto:dlea.digitalservices@gmail.com?subject='+encodeURIComponent('Demande de devis - '+nom)+'&body='+encodeURIComponent(corps);
-      aide.textContent='Votre messagerie s\'ouvre… Si rien ne se passe, écrivez-moi à dlea.digitalservices@gmail.com.';
+      var envoi=new FormData();
+      envoi.append('Nom',nom);
+      envoi.append('Activité',d.get('activite')||'-');
+      envoi.append('email',email);
+      envoi.append('Téléphone',d.get('tel')||'-');
+      envoi.append('Services',services.length?services.join(', '):'-');
+      envoi.append('Besoin',d.get('message')||'-');
+      envoi.append('_subject','Demande de devis - '+nom);
+      var btn=form.querySelector('button[type=submit]');
+      btn.disabled=true; btn.textContent='Envoi en cours…';
       aide.style.color='';
+      fetch('https://formspree.io/f/xvkzvpwd',{method:'POST',body:envoi,headers:{'Accept':'application/json'}})
+        .then(function(r){ if(!r.ok) throw new Error('envoi'); 
+          form.innerHTML='<h3>Merci&nbsp;!</h3><p style="color:var(--encre-douce)">Votre demande est bien envoyée. Je vous réponds très vite, en toute discrétion.</p><span class="signe" style="font-family:var(--signature);font-size:36px;color:var(--bordeaux)">— L.</span>';
+        })
+        .catch(function(){
+          btn.disabled=false; btn.textContent='Envoyer ma demande';
+          aide.innerHTML='Oups, l\'envoi n\'a pas fonctionné. Réessayez, ou écrivez-moi à <a href="mailto:dlea.digitalservices@gmail.com">dlea.digitalservices@gmail.com</a>.';
+          aide.style.color='var(--rose-signature)';
+        });
     });
   })();
 </script>
