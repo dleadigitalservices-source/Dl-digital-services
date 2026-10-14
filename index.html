@@ -35,21 +35,29 @@
   :focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px}
 
   /* ---------- Le rideau qui se lève à l'arrivée ---------- */
-  /* Rideaux de velours réalistes (texture ombrée), lambrequin à festons et frange dorée */
-  .lever{position:fixed;inset:0;z-index:50;pointer-events:none;overflow:hidden;background:#1a0307;animation:eteindre .8s ease 2.4s forwards}
-  .pan{position:absolute;top:0;bottom:0;width:51%;overflow:hidden;
-    animation-duration:2.2s;animation-timing-function:cubic-bezier(.65,0,.25,1);animation-delay:.8s;animation-fill-mode:forwards}
+  /* Rideaux de velours bordeaux, sobres : deux pans qui s'ouvrent en deux, une fine tringle en laiton patiné */
+  .lever{position:fixed;inset:0;z-index:50;pointer-events:none;overflow:hidden;background:#140205;animation:eteindre 1.6s ease 1.2s forwards, disparaitre .9s ease 3.6s forwards}
+  .pan{position:absolute;top:0;bottom:0;width:51%;overflow:hidden;will-change:transform;
+    animation-duration:2.6s;animation-timing-function:cubic-bezier(.6,0,.2,1);animation-delay:.9s;animation-fill-mode:forwards}
   .pan::before{content:"";position:absolute;inset:0;background:url(images/rideau-velours.webp) center top/auto 100% repeat-x}
+  .pan::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 35%, rgba(255,215,190,.08), transparent 70%)}
   .pan.d::before{transform:scaleX(-1)}
-  .pan.g{left:0;transform-origin:left center;animation-name:ouvrir-g;box-shadow:18px 0 40px rgba(0,0,0,.6)}
-  .pan.d{right:0;transform-origin:right center;animation-name:ouvrir-d;box-shadow:-18px 0 40px rgba(0,0,0,.6)}
-  .lambrequin{position:absolute;left:0;right:0;top:0;height:clamp(100px,15vh,160px);z-index:2;
-    background:url(images/lambrequin-velours.webp) center top/auto 100% repeat-x;filter:drop-shadow(0 10px 14px rgba(0,0,0,.5));
-    animation:monter 1.4s cubic-bezier(.65,0,.25,1) 2s forwards}
-  @keyframes ouvrir-g{to{transform:translateX(-92%) scaleX(.5)}}
-  @keyframes ouvrir-d{to{transform:translateX(92%) scaleX(.5)}}
-  @keyframes monter{to{transform:translateY(-130%)}}
+  .pan.g{left:0;transform-origin:left top;animation-name:ouvrir-g;box-shadow:16px 0 36px rgba(0,0,0,.55)}
+  .pan.d{right:0;transform-origin:right top;animation-name:ouvrir-d;box-shadow:-16px 0 36px rgba(0,0,0,.55)}
+  .tringle{position:absolute;left:0;right:0;top:0;height:9px;z-index:2;
+    background:linear-gradient(180deg,#3a2a17 0%,#9c7a4c 35%,#d9bd8c 50%,#8a6a3e 70%,#2e2010 100%);
+    box-shadow:0 3px 10px rgba(0,0,0,.6);}
+  @keyframes ouvrir-g{
+    0%{transform:none}
+    30%{transform:scaleX(.82) skewY(.5deg)}
+    100%{transform:scaleX(.13) skewY(0)}}
+  @keyframes ouvrir-d{
+    0%{transform:none}
+    30%{transform:scaleX(.82) skewY(-.5deg)}
+    100%{transform:scaleX(.13) skewY(0)}}
+  @keyframes disparaitre{to{opacity:0}}
   @keyframes eteindre{to{background:transparent}}
+  @keyframes eteindre-tringle{to{opacity:0;transform:translateY(-10px)}}
 
   /* ---------- En-tête ---------- */
   header{position:sticky;top:0;z-index:20;background:rgba(251,244,241,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(176,137,96,.25)}
@@ -228,7 +236,7 @@
 
 <div class="lever" aria-hidden="true">
   <div class="pan g"></div><div class="pan d"></div>
-  <div class="lambrequin"></div>
+  <div class="tringle"></div>
 </div>
 
 <header>
@@ -521,7 +529,7 @@
 
     // Retirer le rideau d'ouverture une fois levé
     var lever=document.querySelector('.lever');
-    setTimeout(function(){ if(lever) lever.remove(); }, 3400);
+    setTimeout(function(){ if(lever) lever.remove(); }, 4600);
 
     // Loupe sur les visuels de tarifs
     var loupe=document.getElementById('loupe'), img=loupe.querySelector('img');
