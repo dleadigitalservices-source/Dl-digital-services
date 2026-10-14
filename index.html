@@ -35,12 +35,42 @@
   :focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px}
 
   /* ---------- Le rideau qui se lève à l'arrivée ---------- */
-  .lever{position:fixed;inset:0;z-index:50;pointer-events:none;display:flex}
-  .lever span{flex:1;background:linear-gradient(90deg, #3E0915 0%, #5A0F20 55%, #6E1729 100%);
-    animation:ouvrir-g 1.6s cubic-bezier(.7,0,.2,1) .35s forwards}
-  .lever span + span{animation-name:ouvrir-d;background:linear-gradient(270deg, #3E0915 0%, #5A0F20 55%, #6E1729 100%)}
-  @keyframes ouvrir-g{to{transform:translateX(-102%)}}
-  @keyframes ouvrir-d{to{transform:translateX(102%)}}
+  /* Rideaux de velours, façon vieux manoir : plis profonds, reflets, lambrequin festonné et galon doré */
+  .lever{position:fixed;inset:0;z-index:50;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse 50% 60% at 50% 40%, rgba(255,214,170,.25), transparent 70%);animation:eteindre .6s ease 2.5s forwards}
+  .pan{position:absolute;top:0;bottom:0;width:51%;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 38%, rgba(255,170,185,.10), transparent 70%),
+      linear-gradient(180deg, rgba(0,0,0,.5) 0%, transparent 16%, transparent 72%, rgba(0,0,0,.55) 100%),
+      repeating-linear-gradient(90deg, rgba(0,0,0,0) 0, rgba(0,0,0,.28) 47px, rgba(0,0,0,0) 94px, rgba(255,235,240,.05) 118px, rgba(0,0,0,0) 141px),
+      repeating-linear-gradient(90deg, #2a050c 0px, #46091a 9px, #721829 21px, #9c3249 29px, #b8495f 32px, #8a2539 37px, #5a0f20 50px, #33060f 63px, #3e0915 72px, #2a050c 84px);
+    animation-duration:2.1s;animation-timing-function:cubic-bezier(.65,0,.25,1);animation-delay:.7s;animation-fill-mode:forwards}
+  .pan::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");mix-blend-mode:overlay;opacity:.55}
+  .pan::after{content:"";position:absolute;top:0;bottom:0;width:14px;
+    background:linear-gradient(90deg, #6e4a26, #e3c48f 35%, #b08960 55%, #7a5530 100%);box-shadow:0 0 18px rgba(0,0,0,.5)}
+  .pan.g{left:0;transform-origin:left center;animation-name:ouvrir-g;box-shadow:12px 0 40px rgba(0,0,0,.55)}
+  .pan.g::after{right:0}
+  .pan.d{right:0;transform-origin:right center;animation-name:ouvrir-d;box-shadow:-12px 0 40px rgba(0,0,0,.55)}
+  .pan.d::after{left:0}
+  .lambrequin{position:absolute;left:0;right:0;top:0;height:clamp(64px,11vh,110px);z-index:2;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.45), transparent 45%, rgba(0,0,0,.3)),
+      repeating-linear-gradient(90deg, #3e0915 0, #7a1a2f 14px, #a33a50 20px, #6b1427 30px, #3e0915 44px);
+    box-shadow:0 6px 18px rgba(0,0,0,.5);animation:monter 1.4s cubic-bezier(.65,0,.25,1) 1.9s forwards}
+  .lambrequin::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");mix-blend-mode:overlay;opacity:.5}
+  .lambrequin .galon{position:absolute;left:0;right:0;bottom:14px;height:6px;background:repeating-linear-gradient(90deg,#7a5530 0,#e3c48f 4px,#b08960 8px,#7a5530 12px);box-shadow:0 1px 3px rgba(0,0,0,.5)}
+  .lambrequin .festons{position:absolute;left:0;right:0;top:100%;height:34px;
+    background:repeating-linear-gradient(90deg, #3e0915 0, #7a1a2f 14px, #a33a50 20px, #6b1427 30px, #3e0915 44px);
+    -webkit-mask:radial-gradient(60px 34px at 60px 0, #000 98%, transparent 100%) 0 0/120px 100% repeat-x;
+            mask:radial-gradient(60px 34px at 60px 0, #000 98%, transparent 100%) 0 0/120px 100% repeat-x;
+    filter:drop-shadow(0 3px 0 #b08960) drop-shadow(0 6px 8px rgba(0,0,0,.45))}
+  .lambrequin .festons-or{position:absolute;left:0;right:0;top:100%;height:40px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4))}
+  .lambrequin .festons-or::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#b08960,#e3c48f,#b08960);
+    -webkit-mask:radial-gradient(62px 40px at 60px 0, #000 98%, transparent 100%) 0 0/120px 100% repeat-x;
+            mask:radial-gradient(62px 40px at 60px 0, #000 98%, transparent 100%) 0 0/120px 100% repeat-x}
+  @keyframes ouvrir-g{to{transform:translateX(-96%) scaleX(.55)}}
+  @keyframes ouvrir-d{to{transform:translateX(96%) scaleX(.55)}}
+  @keyframes monter{to{transform:translateY(-130%)}}
+  @keyframes eteindre{to{background:transparent}}
 
   /* ---------- En-tête ---------- */
   header{position:sticky;top:0;z-index:20;background:rgba(251,244,241,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(176,137,96,.25)}
@@ -69,9 +99,12 @@
   .accueil{position:relative;z-index:2;width:min(660px, calc(100% - 32px));padding-block:64px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;color:var(--ivoire)}
   .petit-titre{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--or-rose)}
   .accueil .petit-titre{color:#E7C9A8}
-  .accueil h1{font-size:clamp(36px,7.4vw,62px);color:var(--ivoire);text-shadow:0 2px 24px rgba(30,4,10,.5)}
-  .accueil h1 em{font-family:var(--signature);font-style:normal;font-weight:400;color:var(--rose-poudre);font-size:1.25em;display:block;line-height:1}
+  .accueil h1{font-size:clamp(32px,6.4vw,56px);color:var(--ivoire);text-shadow:0 2px 24px rgba(30,4,10,.5)}
+  .accueil h1 em{font-style:italic;color:var(--rose-poudre);display:block;margin-top:.1em}
   .poeme{display:flex;flex-direction:column;gap:4px;color:rgba(251,244,241,.9);font-size:clamp(15px,2.2vw,17px);text-shadow:0 1px 12px rgba(30,4,10,.6)}
+  .poeme .question{font-size:1.12em;color:var(--ivoire)}
+  .poeme strong{font-weight:400;color:var(--rose-poudre);font-family:var(--titre);font-style:italic;font-size:1.15em}
+  .rassure{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,244,241,.7);line-height:2;margin-top:4px}
   .poeme .fort{color:var(--ivoire);font-family:var(--titre);font-style:italic;font-size:1.12em;margin-top:6px}
   .accueil .bouton.leger{color:var(--ivoire)!important;border-color:rgba(251,244,241,.6)}
   .accueil .bouton.leger:hover{background:rgba(251,244,241,.12)}
@@ -208,7 +241,10 @@
 </head>
 <body>
 
-<div class="lever" aria-hidden="true"><span></span><span></span></div>
+<div class="lever" aria-hidden="true">
+  <div class="pan g"></div><div class="pan d"></div>
+  <div class="lambrequin"><span class="galon"></span><span class="festons-or"></span><span class="festons"></span></div>
+</div>
 
 <header>
   <div class="barre">
@@ -231,25 +267,24 @@
     <div class="voile-photo"></div>
 
     <div class="accueil">
-      <span class="petit-titre">DL Digital Services · Nantes</span>
-      <h1>Bienvenue <em>dans les coulisses</em></h1>
+      <span class="petit-titre">Bienvenue dans les coulisses</span>
+      <h1>Les Pages jaunes d'hier, <em>c'est Google et Instagram aujourd'hui.</em></h1>
       <div class="poeme">
-        <p>Imaginez un bureau d'autrefois, du bois clair et de grands rideaux de velours bordeaux.</p>
-        <p>Des fleurs, une lumière douce, un café qui vous attend.</p>
-        <p>Ici, on prend le temps de vous écouter.</p>
-        <p>Vous déposez ce qui pèse sur vos épaules…</p>
-        <p class="fort">et vous repartez plus léger, plus libre, plus serein.</p>
+        <p class="question">Vos futurs clients vous cherchent déjà en ligne.<br>La vraie question : <strong>vous trouvent-ils&nbsp;?</strong></p>
+        <p>Réseaux sociaux, fiche Google, contenus, tâches digitales : je m'occupe de tout, en coulisses.</p>
+        <p class="fort">Vous restez sur scène. Je m'occupe du reste.</p>
       </div>
       <div class="actions">
-        <a class="bouton" href="#contact">Demander un devis</a>
-        <a class="bouton leger" href="#services">Découvrir mes services</a>
+        <a class="bouton" href="#contact">Je veux être visible</a>
+        <a class="bouton leger" href="#tarifs">Voir les tarifs</a>
       </div>
+      <p class="rassure">Community management • Création de contenus • Assistance digitale<br>Nantes et Loire-Atlantique</p>
     </div>
   </div>
 
   <!-- Slogan -->
   <div class="slogan">
-    <blockquote class="reveler">Les Pages jaunes d'hier, <span>c'est Google et Instagram aujourd'hui.</span></blockquote>
+    <blockquote class="reveler">Derrière le rideau, <span>une petite main pour vos grandes idées…</span></blockquote>
   </div>
 
   <!-- Services -->
@@ -497,7 +532,7 @@
 
     // Retirer le rideau d'ouverture une fois levé
     var lever=document.querySelector('.lever');
-    setTimeout(function(){ if(lever) lever.remove(); }, 2300);
+    setTimeout(function(){ if(lever) lever.remove(); }, 3400);
 
     // Loupe sur les visuels de tarifs
     var loupe=document.getElementById('loupe'), img=loupe.querySelector('img');
