@@ -102,7 +102,13 @@ class SupabaseAdapter {
     if (error) throw error;
   }
 
-  async saveCollection(name, items) { for (const it of items) await this.upsert(name, it.id, it); }
+  async saveCollection(name, items) {
+    if (!items.length) return;
+    const now = new Date().toISOString();
+    const rows = items.map((it) => ({ id: it.id, kind: name, data: it, updated_at: now }));
+    const { error } = await this.client.from('records').upsert(rows);
+    if (error) throw error;
+  }
   async saveItem(name, item) { await this.upsert(name, item.id, item); }
   async removeItem(name, id) {
     const { error } = await this.client.from('records').delete().eq('id', id);
@@ -128,7 +134,7 @@ class Store {
   /** Prépare le client Supabase si la configuration existe. */
   async initAuth() {
     if (!this.secureAvailable) return null;
-    const mod = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm');
+    const mod = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.0/+esm');
     this.supabase = mod.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
       auth: { persistSession: true, autoRefreshToken: true },
     });
