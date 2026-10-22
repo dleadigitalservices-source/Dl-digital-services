@@ -58,6 +58,8 @@
     0%{transform:none}
     30%{transform:scaleX(.82) skewY(-.5deg)}
     100%{transform:scaleX(.13) skewY(0)}}
+  /* Le rideau attend que la photo du velours soit chargée avant de s'ouvrir : toujours le même rideau */
+  .lever:not(.pret),.lever:not(.pret) .pan{animation-play-state:paused}
   @keyframes ouvrir-doux{from{transform:none}to{transform:scaleX(.13)}}
   @keyframes disparaitre{to{opacity:0}}
   @keyframes eteindre{to{background:transparent}}
@@ -446,6 +448,10 @@
             <span class="icone"><svg viewBox="0 0 24 24"><path d="M14 8h2.5V4.5H14A3.5 3.5 0 0 0 10.5 8v2.5H8V14h2.5v6.5H14V14h2.5l.5-3.5h-3V8z"/></svg></span>
             <span><b>Facebook</b><small>La page DL Digital Services</small></span>
           </a>
+          <a class="ligne" href="https://www.snapchat.com/@dldigitalservic" target="_blank" rel="noopener">
+            <span class="icone"><svg viewBox="0 0 24 24"><path d="M12 3.5c-3 0-5 2.2-5 5.2v2.1l-1.6-.4c-.6-.1-.9.6-.4 1l1.8 1c-.6 1.6-1.8 2.9-3.4 3.4.3.8 1.4 1 2.4 1.1.2.6.3 1.1.9 1.1.7 0 1.4-.3 2.3.2.9.5 1.7 1.3 3 1.3s2.1-.8 3-1.3c.9-.5 1.6-.2 2.3-.2.6 0 .7-.5.9-1.1 1-.1 2.1-.3 2.4-1.1-1.6-.5-2.8-1.8-3.4-3.4l1.8-1c.5-.4.2-1.1-.4-1l-1.6.4V8.7c0-3-2-5.2-5-5.2z"/></svg></span>
+            <span><b>Snapchat</b><small>@dldigitalservic</small></span>
+          </a>
           <div class="ligne bientot" aria-disabled="true">
             <span class="icone"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>
             <span><b>Prendre rendez-vous</b><small>Bientôt disponible</small></span>
@@ -538,7 +544,18 @@
 
     // Retirer le rideau d'ouverture une fois levé
     var lever=document.querySelector('.lever');
-    setTimeout(function(){ if(lever) lever.remove(); }, 4600);
+    if(lever){
+      var velours=new Image();
+      var lancer=function(){
+        if(lever.classList.contains('pret')) return;
+        lever.classList.add('pret');
+        setTimeout(function(){ lever.remove(); }, 4600);
+      };
+      velours.onload=lancer; velours.onerror=lancer;
+      velours.src='images/rideau-velours.webp';
+      if(velours.complete) lancer();
+      setTimeout(lancer, 2500); // connexion très lente : on ouvre quand même
+    }
 
     // Loupe sur les visuels de tarifs
     var loupe=document.getElementById('loupe'), img=loupe.querySelector('img');
