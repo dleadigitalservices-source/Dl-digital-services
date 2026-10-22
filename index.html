@@ -11,6 +11,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#5A0F20">
 <link rel="icon" href="liens/logo.png">
+<link rel="preload" as="image" href="images/rideau-velours.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital,wght@0,500;1,500&family=Poppins:wght@300;400&display=swap">
@@ -39,6 +40,8 @@
   .lever{position:fixed;inset:0;z-index:50;pointer-events:none;overflow:hidden;background:#140205;animation:eteindre 1.6s ease 1.2s forwards, disparaitre .9s ease 3.6s forwards}
   .pan{position:absolute;top:0;bottom:0;width:51%;overflow:hidden;will-change:transform;
     animation-duration:2.6s;animation-timing-function:cubic-bezier(.6,0,.2,1);animation-delay:.9s;animation-fill-mode:forwards}
+  /* Velours de secours : les pans restent bordeaux même si la photo du rideau n'est pas encore chargée */
+  .pan{background:repeating-linear-gradient(90deg,#5A0F20 0px,#3E0915 14px,#7A2236 26px,#5A0F20 36px)}
   .pan::before{content:"";position:absolute;inset:0;background:url(images/rideau-velours.webp) center top/auto 100% repeat-x}
   .pan::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 35%, rgba(255,215,190,.08), transparent 70%)}
   .pan.d::before{transform:scaleX(-1)}
@@ -55,6 +58,7 @@
     0%{transform:none}
     30%{transform:scaleX(.82) skewY(-.5deg)}
     100%{transform:scaleX(.13) skewY(0)}}
+  @keyframes ouvrir-doux{from{transform:none}to{transform:scaleX(.13)}}
   @keyframes disparaitre{to{opacity:0}}
   @keyframes eteindre{to{background:transparent}}
   @keyframes eteindre-tringle{to{opacity:0;transform:translateY(-10px)}}
@@ -226,7 +230,8 @@
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .lever{display:none}
+    /* Animations réduites sur l'appareil : le rideau s'ouvre quand même, plus doucement */
+    .pan.g,.pan.d{animation-name:ouvrir-doux;animation-timing-function:ease-in-out}
     .reveler{opacity:1;transform:none;transition:none}
     .carte,.bouton,.ligne{transition:none}
   }
