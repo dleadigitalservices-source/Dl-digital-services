@@ -1,20 +1,20 @@
 /* DL Digital Services · Gestion — feuille de style
    DA : framboise / bordeaux rosé, ivoire, rose poudré, or rosé.
-   Titres Playfair Display, texte Poppins (léger), 17 px minimum. */
+   Titres Playfair Display, texte Poppins (normal, contraste renforcé), 17 px minimum. */
 
 :root {
-  --ivoire: #FBF4F1;
-  --voile: #F3E3DE;
+  --ivoire: #F3E4DF;   /* fond un peu plus soutenu (avant : #FBF4F1) */
+  --voile: #E9D1CA;
   --blanc: #FFFFFF;
   --framboise: #8A1F3D;
   --framboise-fonce: #6B1530;
   --framboise-clair: #A8455A;
   --rose-poudre: #E9C4C4;
   --or-rose: #B08960;
-  --encre: #3A0A14;
-  --encre-douce: #7A4A52;
-  --ligne: #EEDDD8;
-  --bord-champ: #E2CBC6;
+  --encre: #2A0610;
+  --encre-douce: #5C2C36;
+  --ligne: #D9BDB6;
+  --bord-champ: #BF9C95;
   --vert: #2F5E45;      --vert-fond: #E3EFE7;
   --orange: #6B4A12;    --orange-fond: #F6EBD7;
   --rouge: #8E2A1D;     --rouge-fond: #F8E1DC;
@@ -23,7 +23,7 @@
   --type-tournage: #B08960; --type-admin: #5B6B7A; --type-perso: #9AA3AB;
   --rayon: 18px;
   --rayon-s: 14px;
-  --ombre: 0 4px 18px rgba(90, 15, 32, 0.07);
+  --ombre: 0 2px 10px rgba(90, 15, 32, 0.10);
   --titre: "Playfair Display", Georgia, "Times New Roman", serif;
   --texte: "Poppins", "Helvetica Neue", Arial, sans-serif;
   --texte-taille: 17px;
@@ -38,7 +38,7 @@ html.police-dys body { font-family: Verdana, "Atkinson Hyperlegible", Tahoma, sa
 html, body { margin: 0; background: var(--ivoire); }
 body {
   font-family: var(--texte);
-  font-weight: 300;
+  font-weight: 400;
   font-size: var(--texte-taille);
   line-height: 1.5;
   color: var(--encre);
@@ -69,7 +69,7 @@ img { max-width: 100%; }
 .demo-banner + #view { padding-top: 16px; }
 
 /* ---------- Typographie ---------- */
-h1, h2, h3 { font-family: var(--titre); font-weight: 500; margin: 0; line-height: 1.2; }
+h1, h2, h3 { font-family: var(--titre); font-weight: 600; margin: 0; line-height: 1.2; }
 h1 { font-size: 30px; }
 h2 { font-size: 21px; color: var(--framboise); }
 h3 { font-size: 18px; }
@@ -97,7 +97,7 @@ h3 { font-size: 18px; }
 }
 
 /* ---------- Cartes et listes ---------- */
-.carte { background: var(--blanc); border-radius: var(--rayon); padding: 16px; box-shadow: var(--ombre); }
+.carte { background: var(--blanc); border-radius: var(--rayon); padding: 16px; box-shadow: var(--ombre); border: 1px solid var(--ligne); }
 .carte-voile { background: var(--voile); border-radius: var(--rayon); padding: 14px 16px; }
 .carte-framboise { background: var(--framboise); color: var(--ivoire); border-radius: var(--rayon-s); padding: 12px 14px; }
 .carte-alerte { background: var(--rouge-fond); color: var(--rouge); border-radius: 16px; padding: 12px 14px; }
@@ -105,10 +105,10 @@ h3 { font-size: 18px; }
 .element {
   display: flex; align-items: center; gap: 12px;
   background: var(--blanc); border-radius: var(--rayon-s); padding: 12px 14px;
-  text-decoration: none; color: inherit; min-height: 56px; border: 0; width: 100%; text-align: left;
+  text-decoration: none; color: inherit; min-height: 56px; border: 1px solid var(--ligne); width: 100%; text-align: left;
 }
 button.element, a.element { cursor: pointer; }
-.element .titre { font-size: 16px; font-weight: 400; display: block; }
+.element .titre { font-size: 16px; font-weight: 500; display: block; }
 .element .detail { font-size: 14px; color: var(--encre-douce); display: block; }
 .avatar {
   width: 42px; height: 42px; flex: 0 0 auto; border-radius: 999px;
@@ -117,8 +117,8 @@ button.element, a.element { cursor: pointer; }
   font-family: var(--titre); font-weight: 600; font-size: 16px;
 }
 .avatar.grand { width: 60px; height: 60px; font-size: 22px; }
-.kpi { background: var(--blanc); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; text-decoration: none; color: inherit; }
-.kpi .valeur { font-size: 21px; font-weight: 500; }
+.kpi { background: var(--blanc); border: 1px solid var(--ligne); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; text-decoration: none; color: inherit; }
+.kpi .valeur { font-size: 21px; font-weight: 600; }
 .kpi .libelle { font-size: 13px; color: var(--encre-douce); }
 .vide { text-align: center; padding: 28px 16px; color: var(--encre-douce); }
 .separateur { height: 1px; background: var(--ligne); border: 0; margin: 4px 0; }
@@ -160,10 +160,10 @@ button.element, a.element { cursor: pointer; }
 .champ { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 400; color: var(--encre-douce); }
 .champ input, .champ select, .champ textarea {
   min-height: 52px; border-radius: var(--rayon-s); border: 1px solid var(--bord-champ); background: var(--blanc);
-  padding: 12px 14px; font-size: 17px; font-weight: 300; color: var(--encre); width: 100%;
+  padding: 12px 14px; font-size: 17px; font-weight: 400; color: var(--encre); width: 100%;
 }
 .champ textarea { min-height: 96px; resize: vertical; line-height: 1.45; }
-.champ .aide { font-size: 13px; font-weight: 300; }
+.champ .aide { font-size: 13px; font-weight: 400; }
 .champ.erreur input, .champ.erreur select { border-color: var(--rouge); }
 .case { display: flex; align-items: center; gap: 12px; font-size: 16px; min-height: 44px; cursor: pointer; }
 .case input { width: 24px; height: 24px; accent-color: var(--framboise); flex: 0 0 auto; }
