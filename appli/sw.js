@@ -1,7 +1,7 @@
 // Service worker : permet d'ouvrir l'application même sans réseau.
 // Changer VERSION à chaque mise à jour pour que l'iPhone récupère les nouveaux fichiers.
 
-const VERSION = 'dl-gestion-v1.0.1';
+const VERSION = 'dl-gestion-v1.0.2';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/config.js', 'js/util.js', 'js/store.js', 'js/legal.js', 'js/ui.js', 'js/demo.js',

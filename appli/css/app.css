@@ -3,18 +3,18 @@
    Titres Playfair Display, texte Poppins (normal, contraste renforcé), 17 px minimum. */
 
 :root {
-  --ivoire: #F3E4DF;   /* fond un peu plus soutenu (avant : #FBF4F1) */
-  --voile: #E9D1CA;
+  --ivoire: #EAD5CE;   /* fond soutenu pour plus de contraste (V1 : #FBF4F1) */
+  --voile: #DDBFB6;
   --blanc: #FFFFFF;
   --framboise: #8A1F3D;
   --framboise-fonce: #6B1530;
   --framboise-clair: #A8455A;
-  --rose-poudre: #E9C4C4;
+  --rose-poudre: #E2B3B6;
   --or-rose: #B08960;
-  --encre: #2A0610;
-  --encre-douce: #5C2C36;
-  --ligne: #D9BDB6;
-  --bord-champ: #BF9C95;
+  --encre: #1E030A;
+  --encre-douce: #4A1C26;
+  --ligne: #C9A69D;
+  --bord-champ: #A5807A;
   --vert: #2F5E45;      --vert-fond: #E3EFE7;
   --orange: #6B4A12;    --orange-fond: #F6EBD7;
   --rouge: #8E2A1D;     --rouge-fond: #F8E1DC;
@@ -23,7 +23,7 @@
   --type-tournage: #B08960; --type-admin: #5B6B7A; --type-perso: #9AA3AB;
   --rayon: 18px;
   --rayon-s: 14px;
-  --ombre: 0 2px 10px rgba(90, 15, 32, 0.10);
+  --ombre: 0 2px 10px rgba(90, 15, 32, 0.14);
   --titre: "Playfair Display", Georgia, "Times New Roman", serif;
   --texte: "Poppins", "Helvetica Neue", Arial, sans-serif;
   --texte-taille: 17px;
