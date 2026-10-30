@@ -144,9 +144,9 @@
       </a>
 
       <div class="lien" role="group" aria-label="E-mail">
-        <a href="mailto:dlea.digitalservices@gmail.com?subject=Mon%20projet" style="display:contents;color:inherit;text-decoration:none">
+        <a href="mailto:contact@dldigitalservices.fr?subject=Mon%20projet" style="display:contents;color:inherit;text-decoration:none">
           <span class="rond"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7l8 6 8-6"/></svg></span>
-          <span class="txt"><b>Me parler de votre projet</b><small id="adresse">dlea.digitalservices@gmail.com</small></span>
+          <span class="txt"><b>Me parler de votre projet</b><small id="adresse">contact@dldigitalservices.fr</small></span>
         </a>
         <button class="copier" id="btn-copier" type="button">Copier</button>
       </div>
@@ -167,7 +167,7 @@
 
 <script>
   (function(){
-    var btn=document.getElementById('btn-copier'), adr='dlea.digitalservices@gmail.com';
+    var btn=document.getElementById('btn-copier'), adr='contact@dldigitalservices.fr';
     btn.addEventListener('click',function(){
       function ok(){btn.textContent='Copié';setTimeout(function(){btn.textContent='Copier';},1800);}
       function repli(){var r=document.createRange();r.selectNodeContents(document.getElementById('adresse'));var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Sélectionné';setTimeout(function(){btn.textContent='Copier';},1800);}
