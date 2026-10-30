@@ -310,7 +310,98 @@
     .reveler{opacity:1;transform:none;transition:none}
     .carte,.bouton,.ligne{transition:none}
   }
+
+  /* ---------- FAQ : velours bordeaux, questions repliées ---------- */
+  .faq{background:radial-gradient(ellipse 90% 70% at 50% 0%, var(--bordeaux-clair) 0%, var(--bordeaux) 55%, var(--bordeaux-ombre) 100%);color:var(--ivoire)}
+  .faq h2{color:var(--ivoire)}
+  .faq .petit-titre{color:var(--rose-poudre)}
+  .faq .entete p{color:var(--rose-poudre);max-width:46ch}
+  .questions{width:min(760px,100%);margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .questions details{border:1px solid rgba(233,196,196,.28);border-radius:18px;background:rgba(62,9,21,.35);transition:background .3s ease,border-color .3s ease}
+  .questions details[open]{background:rgba(251,244,241,.07);border-color:rgba(176,137,96,.6)}
+  .questions summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;font-family:var(--titre);font-size:clamp(17px,2.2vw,19px);color:var(--ivoire)}
+  .questions summary::-webkit-details-marker{display:none}
+  .questions summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(233,196,196,.5);display:grid;place-items:center;font-family:var(--texte);font-size:18px;line-height:1;color:var(--rose-poudre)}
+  .questions details[open] summary::after{content:"\2212";background:var(--rose-poudre);color:var(--bordeaux);border-color:var(--rose-poudre)}
+  .questions summary:focus-visible{outline:2px solid var(--rose-poudre);outline-offset:3px;border-radius:18px}
+  .questions .reponse{padding:0 22px 20px;color:var(--voile);max-width:62ch}
+  .faq-fin{margin-top:clamp(32px,5vw,48px);text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center}
+  .faq-fin p{font-family:var(--titre);font-style:italic;font-size:1.1em;color:var(--ivoire)}
+  .faq-fin a{display:inline-block;padding:12px 26px;border-radius:999px;background:var(--rose-poudre);color:var(--bordeaux);text-decoration:none;font-weight:400;font-size:14px;letter-spacing:.06em}
+  .faq-fin a:focus-visible{outline:2px solid var(--ivoire);outline-offset:3px}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce qu'un community manager ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "C'est la personne qui prend soin de vos réseaux sociaux et de votre fiche Google, comme on prendrait soin d'une vitrine. Je publie pour vous, je réponds à votre communauté avec attention, et je fais en sorte que vos futurs clients vous trouvent… et aient envie de pousser votre porte."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte un community manager à Nantes ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mes accompagnements commencent à partir de 390 € par mois. Mais chaque entreprise est unique : nous en parlons d'abord ensemble, puis je vous propose un tarif qui vous ressemble. Ici, pas de formule imposée."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce qu'une assistante digitale ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "C'est un peu comme une collègue de confiance, à distance. E-mails, agenda, tâches administratives : je m'occupe de ce qui vous pèse, en toute discrétion, pour que vous retrouviez du temps pour votre métier. À partir de 40 € de l'heure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi ma fiche Google est-elle si importante ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hier, on vous cherchait dans l'annuaire. Aujourd'hui, on tape votre métier et votre ville sur Google. Votre fiche, c'est souvent la toute première impression que vous laissez : avec de belles photos, vos horaires et vos avis, elle donne confiance… et envie de vous appeler."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pouvez-vous créer mon site internet ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Avec plaisir. Page de liens, site vitrine, application de gestion : je crée des outils simples, à votre image et pensés pour votre façon de travailler. À partir de 150 €."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Travaillez-vous uniquement à Nantes ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Je me déplace volontiers à Nantes et dans toute la Loire-Atlantique (44). Et grâce au digital, je vous accompagne aussi à distance, partout en France."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Je ne suis pas à l'aise avec le digital, est-ce un problème ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pas du tout, rassurez-vous : c'est justement pour cela que je suis là. Je prends le temps de vous écouter, j'explique chaque étape avec des mots simples, et nous avançons à votre rythme. Vous restez sur scène, je m'occupe du reste."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment se passe le premier contact ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tout commence par un appel diagnostic, offert. Nous prenons le temps de faire connaissance et de regarder ensemble votre visibilité et vos envies. Ensuite, je vous propose un devis sur mesure, sans aucune pression."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -490,6 +581,55 @@
         <p>DL Digital Services est né de cette rencontre : l'humain et le digital, réunis pour accompagner les entrepreneurs.</p>
         <p class="chute">Comme au théâtre, je travaille en coulisses… pour que vous puissiez briller sur scène.</p>
         <span class="signe" aria-label="Signé L.">— L.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="contenu">
+      <div class="entete reveler">
+        <span class="petit-titre">Questions fréquentes</span>
+        <h2>Vous vous demandez peut-être…</h2>
+        <p>Installez-vous, le café est servi. Voici les questions que l'on me pose le plus souvent.</p>
+      </div>
+      <div class="questions reveler">
+        <details open>
+          <summary>Qu'est-ce qu'un community manager ?</summary>
+          <p class="reponse">C'est la personne qui prend soin de vos réseaux sociaux et de votre fiche Google, comme on prendrait soin d'une vitrine. Je publie pour vous, je réponds à votre communauté avec attention, et je fais en sorte que vos futurs clients vous trouvent… et aient envie de pousser votre porte.</p>
+        </details>
+        <details>
+          <summary>Combien coûte un community manager à Nantes ?</summary>
+          <p class="reponse">Mes accompagnements commencent à partir de 390 € par mois. Mais chaque entreprise est unique : nous en parlons d'abord ensemble, puis je vous propose un tarif qui vous ressemble. Ici, pas de formule imposée.</p>
+        </details>
+        <details>
+          <summary>Qu'est-ce qu'une assistante digitale ?</summary>
+          <p class="reponse">C'est un peu comme une collègue de confiance, à distance. E-mails, agenda, tâches administratives : je m'occupe de ce qui vous pèse, en toute discrétion, pour que vous retrouviez du temps pour votre métier. À partir de 40 € de l'heure.</p>
+        </details>
+        <details>
+          <summary>Pourquoi ma fiche Google est-elle si importante ?</summary>
+          <p class="reponse">Hier, on vous cherchait dans l'annuaire. Aujourd'hui, on tape votre métier et votre ville sur Google. Votre fiche, c'est souvent la toute première impression que vous laissez : avec de belles photos, vos horaires et vos avis, elle donne confiance… et envie de vous appeler.</p>
+        </details>
+        <details>
+          <summary>Pouvez-vous créer mon site internet ?</summary>
+          <p class="reponse">Avec plaisir. Page de liens, site vitrine, application de gestion : je crée des outils simples, à votre image et pensés pour votre façon de travailler. À partir de 150 €.</p>
+        </details>
+        <details>
+          <summary>Travaillez-vous uniquement à Nantes ?</summary>
+          <p class="reponse">Je me déplace volontiers à Nantes et dans toute la Loire-Atlantique (44). Et grâce au digital, je vous accompagne aussi à distance, partout en France.</p>
+        </details>
+        <details>
+          <summary>Je ne suis pas à l'aise avec le digital, est-ce un problème ?</summary>
+          <p class="reponse">Pas du tout, rassurez-vous : c'est justement pour cela que je suis là. Je prends le temps de vous écouter, j'explique chaque étape avec des mots simples, et nous avançons à votre rythme. Vous restez sur scène, je m'occupe du reste.</p>
+        </details>
+        <details>
+          <summary>Comment se passe le premier contact ?</summary>
+          <p class="reponse">Tout commence par un appel diagnostic, offert. Nous prenons le temps de faire connaissance et de regarder ensemble votre visibilité et vos envies. Ensuite, je vous propose un devis sur mesure, sans aucune pression.</p>
+        </details>
+      </div>
+      <div class="faq-fin reveler">
+        <p>Une autre question ? Je vous réponds avec plaisir.</p>
+        <a href="#contact">Me poser votre question</a>
       </div>
     </div>
   </section>
