@@ -253,6 +253,8 @@
   .encadre::before{content:"";position:absolute;inset:10px;border:1px solid rgba(176,137,96,.22);border-radius:18px;pointer-events:none}
   .signe{font-family:var(--signature);font-size:40px;color:var(--bordeaux);line-height:1;margin-top:4px}
 
+  .photo-dos{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:80% 50%;border-radius:14px}
+
   /* Contact */
   .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,5vw,56px);align-items:start}
   .coordonnees{display:flex;flex-direction:column;gap:14px}
@@ -331,40 +333,97 @@
   .faq-fin a:focus-visible{outline:2px solid var(--ivoire);outline-offset:3px}
 
   /* ---------- Noël : à retirer après les fêtes ---------- */
-@keyframes neige{from{background-position:0 0}to{background-position:0 var(--pas)}}
-@keyframes derive{from{transform:translateX(-14px)}to{transform:translateX(14px)}}
-@keyframes scintille{0%,100%{opacity:.35}50%{opacity:1}}
-@keyframes lueur{0%,100%{opacity:.18;transform:scale(.88)}50%{opacity:.7;transform:scale(1.08)}}
-@keyframes balance-g{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(1.8deg)}}
-@keyframes balance-d{0%,100%{transform:rotate(1.6deg)}50%{transform:rotate(-1.8deg)}}
-@keyframes flotte{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-@keyframes halo{0%,100%{box-shadow:0 24px 60px rgba(30,4,10,.45),0 0 0 rgba(255,201,138,0)}50%{box-shadow:0 28px 66px rgba(30,4,10,.45),0 0 34px rgba(255,201,138,.5)}}
-@keyframes reflet{0%,62%{left:-40%}100%{left:125%}}
-@keyframes mot{0%,100%{text-shadow:0 0 0 rgba(255,201,138,0)}50%{text-shadow:0 0 16px rgba(255,201,138,.75)}}
-.neige{position:absolute;inset:0 -30px;pointer-events:none;background-repeat:repeat;animation:neige var(--duree) linear infinite,derive 7s ease-in-out infinite alternate}
-.neige-1{--pas:430px;--duree:13s;background-size:430px 430px;background-image:radial-gradient(circle at 12% 18%,#fff 0 2px,transparent 3px),radial-gradient(circle at 46% 8%,rgba(255,255,255,.85) 0 2.4px,transparent 3.4px),radial-gradient(circle at 78% 34%,#fff 0 1.8px,transparent 2.8px),radial-gradient(circle at 30% 58%,rgba(255,255,255,.8) 0 2.2px,transparent 3.2px),radial-gradient(circle at 62% 72%,#fff 0 1.8px,transparent 2.8px),radial-gradient(circle at 90% 88%,rgba(255,255,255,.85) 0 2.4px,transparent 3.4px)}
-.neige-2{--pas:610px;--duree:24s;filter:blur(1.4px);opacity:.75;animation-direction:normal,alternate-reverse;background-size:610px 610px;background-image:radial-gradient(circle at 22% 12%,#fff 0 4px,transparent 5px),radial-gradient(circle at 70% 26%,#fff 0 3px,transparent 4px),radial-gradient(circle at 44% 52%,#fff 0 4px,transparent 5px),radial-gradient(circle at 86% 66%,#fff 0 3px,transparent 4px),radial-gradient(circle at 12% 84%,#fff 0 3.5px,transparent 4.5px)}
-.guirlande{position:absolute;left:0;top:0;width:100%;height:76px;pointer-events:none}
-.ampoule{animation:scintille 2.4s ease-in-out infinite;filter:drop-shadow(0 0 6px #FFC98A)}
-.lueur{position:absolute;border-radius:50%;pointer-events:none;mix-blend-mode:screen;background:radial-gradient(circle,rgba(255,205,145,.95) 0%,rgba(255,190,130,.35) 42%,transparent 70%);animation:lueur 5s ease-in-out infinite}
-.branche{position:absolute;top:0;pointer-events:none}
-.branche-g{left:0;transform-origin:0 0;animation:balance-g 6s ease-in-out infinite}
-.branche-d{right:0;transform-origin:100% 0;animation:balance-d 7s ease-in-out infinite}
-.flotte{animation:flotte 6s ease-in-out infinite,halo 6s ease-in-out infinite}
-.reflet{position:relative;overflow:hidden}
-.reflet::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:28%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);animation:reflet 4.5s ease-in-out infinite}
-.mot{animation:mot 3.6s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){.neige,.ampoule,.lueur,.branche-g,.branche-d,.flotte,.reflet::after,.mot{animation:none}}
+.lever{display:none}
+/* ---------- Nouvelle DA : une seule image fixe, le texte défile dessus ---------- */
+header{background:#3A0618;border-bottom-color:rgba(235,199,146,.5)}
+.nom{color:#FFF5EC}
+.menu a{color:#F7D3D3}
+.menu a:hover{color:#fff}
+.menu .bouton{background:#FFF5EC;color:var(--bordeaux)!important;border-color:#FFF5EC}
+.menu .bouton:hover{background:#F7D3D3}
+.menu a[href*=pack-noel]{color:#FFF5EC!important}
+.fond{position:fixed;inset:0;z-index:0;overflow:hidden;background:#3A0618 url(images/noel-fond-site.webp) center bottom/cover no-repeat}
+.lueur{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,196,150,.8) 0%,rgba(255,170,130,.28) 45%,transparent 70%);animation:scintille 5s ease-in-out infinite}
+.etincelle{background:radial-gradient(circle,#fff 0%,rgba(255,226,170,.9) 30%,rgba(255,200,130,.25) 55%,transparent 72%);animation-duration:2.8s}
+.neige{position:fixed;left:-60px;right:-60px;bottom:0;height:calc(100vh + 700px);z-index:15;pointer-events:none;background-repeat:repeat;will-change:transform}
+.neige-1{background-size:420px 420px;background-image:radial-gradient(circle at 12% 18%,#fff 0 2px,transparent 3px),radial-gradient(circle at 46% 8%,rgba(255,255,255,.85) 0 2.6px,transparent 3.6px),radial-gradient(circle at 78% 34%,#fff 0 1.8px,transparent 2.8px),radial-gradient(circle at 30% 58%,rgba(255,255,255,.8) 0 2.4px,transparent 3.4px),radial-gradient(circle at 62% 72%,#fff 0 2px,transparent 3px),radial-gradient(circle at 90% 88%,rgba(255,255,255,.85) 0 2.6px,transparent 3.6px);animation:neige-a 14s linear infinite}
+.neige-2{opacity:.75;z-index:0;background-size:640px 640px;background-image:radial-gradient(circle at 22% 12%,#fff 0 4px,transparent 5px),radial-gradient(circle at 70% 26%,#fff 0 3px,transparent 4px),radial-gradient(circle at 44% 52%,#fff 0 4px,transparent 5px),radial-gradient(circle at 86% 66%,#fff 0 3px,transparent 4px),radial-gradient(circle at 12% 84%,#fff 0 3.5px,transparent 4.5px);animation:neige-b 22s linear infinite}
+.guirlande{position:fixed;left:0;top:64px;width:100%;height:84px;z-index:0;pointer-events:none}
+.ampoule{animation:ampoule 2.4s ease-in-out infinite}
+main,footer{position:relative;z-index:1}
+main section{padding-block:0 16vh}
+main section>.contenu{background:rgba(255,249,243,.93);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);border-radius:22px;padding:clamp(28px,4vw,52px);box-shadow:0 20px 50px rgba(60,12,28,.28)}
+main section.voile,main section.sombre,main section.faq{background:none;color:var(--encre)}
+section.accueil{width:100%;max-width:none;margin:0;flex-direction:row;gap:0;text-align:center;min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:32px 16px 18vh!important}
+.annonce{width:min(680px,100%);text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;color:#FFF5EC;text-shadow:0 2px 16px rgba(30,2,14,.8)}
+.annonce .petit-titre{color:#F2CFA0}
+.annonce h1{color:#FFF5EC;font-size:clamp(30px,3.4vw,48px)}
+.annonce h1 em{color:#F7D3D3}
+.annonce p{font-size:17px}
+.annonce .rassure{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#F7D3D3;line-height:1.9}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.annonce .bouton{background:#FFF5EC;color:var(--bordeaux)!important;border-color:#FFF5EC;text-shadow:none}
+.annonce .bouton:hover{background:#F7D3D3}
+.annonce .bouton.leger{background:transparent;color:#FFF5EC!important;border-color:rgba(255,245,236,.7)}
+.annonce .bouton.leger:hover{background:rgba(255,245,236,.14)}
+.grille,.tarifs{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.carte{padding:24px 18px 20px}
+@media (max-width:1040px){.grille,.tarifs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.grille,.tarifs{grid-template-columns:minmax(0,1fr)}}
+.petit-titre{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--or-rose)}
+.billet{max-width:420px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:8px;align-items:center}
+.billet h2{font-size:32px}
+.billet .mot{font-family:var(--signature);font-weight:400;font-size:56px;color:var(--rose-signature)}
+.montant{font-family:var(--titre);font-weight:500;font-size:42px;line-height:1.1;color:var(--bordeaux)}
+.billet ul{list-style:none;margin:6px 0;padding:0;text-align:left;display:flex;flex-direction:column;gap:6px}
+.billet li{display:flex;gap:10px;align-items:center}
+.billet li.cadeau{font-weight:400;color:var(--bordeaux)}
+.slogan{position:relative;z-index:1;padding:0 16px 16vh;background:none;overflow:visible}
+.slogan blockquote{padding:clamp(24px,4vw,40px);background:rgba(140,18,56,.9);border-radius:22px}
+.sombre h2,.sombre h3,.faq h2{color:var(--bordeaux)}
+.sombre .petit-titre,.faq .petit-titre{color:var(--or-rose)!important}
+.etape p{color:var(--encre-douce)}
+.etape::before{color:var(--bordeaux);border-color:var(--or-rose)}
+.devise{color:var(--bordeaux)}
+.faq .entete p{color:var(--encre-douce)}
+.questions details{background:#FFFBF6;border-color:rgba(138,100,48,.5)}
+.questions details[open]{background:#FFFBF6;border-color:var(--or-rose)}
+.questions summary{color:var(--bordeaux)}
+.questions summary::after{border-color:var(--bordeaux);color:var(--bordeaux)}
+.questions details[open] summary::after{background:var(--bordeaux);color:#fff;border-color:var(--bordeaux)}
+.questions summary:focus-visible{outline-color:var(--bordeaux)}
+.questions .reponse{color:var(--encre-douce)}
+.faq-fin p{color:var(--bordeaux)}
+.faq-fin a{background:var(--bordeaux);color:#fff}
+.faq-fin a:focus-visible{outline-color:var(--bordeaux)}
+.encadre{background:#FFFBF6}
+footer{background:var(--bordeaux-ombre)}
 
-.noel-rangee{position:relative;max-width:1112px!important}
+/* Le lever de rideau d'arrivée */
+.intro{position:fixed;left:0;right:0;top:0;bottom:0;z-index:50;overflow:hidden;pointer-events:none;background:#3A0618;animation:fin-intro .7s ease 3.8s both}
+.i-ferme,.i-ouvert{position:absolute;inset:0;background-size:cover;background-position:center}
+.i-ferme{background-image:url(images/noel-rideau-ferme.webp);animation:ferme 2.1s ease-in-out both}
+.i-ouvert{background-image:url(images/noel-rideau-ouvert.webp);transform-origin:50.5% 64%;opacity:0;animation:ouvert 3.3s cubic-bezier(.55,0,.4,1) 1.3s both}
+body.attente .intro,body.attente .i-ferme,body.attente .i-ouvert{animation-play-state:paused}
+@keyframes ferme{0%{opacity:1;transform:scale(1)}65%{opacity:1}100%{opacity:0;transform:scale(1.06)}}
+@keyframes ouvert{0%{opacity:0;transform:scale(1.02)}26%{opacity:1;transform:scale(1.04)}100%{opacity:1;transform:scale(5.5)}}
+@keyframes fin-intro{to{opacity:0;visibility:hidden}}
+@keyframes scintille{0%,100%{opacity:.25;transform:scale(.85)}50%{opacity:1;transform:scale(1.1)}}
+@keyframes neige-a{from{transform:translate3d(0,0,0)}to{transform:translate3d(30px,420px,0)}}
+@keyframes neige-b{from{transform:translate3d(0,0,0)}to{transform:translate3d(-40px,640px,0)}}
+@keyframes ampoule{0%,100%{opacity:.35}50%{opacity:1}}
 @media (max-width:760px){
-  .noel-photo{object-position:88% center!important}
-  .noel-voile{background:linear-gradient(180deg,rgba(62,9,21,.72) 0%,rgba(62,9,21,.9) 45%,rgba(62,9,21,.94) 100%)!important}
-  .noel-rangee{flex-direction:column!important;align-items:stretch!important;gap:0!important;padding-top:112px!important;padding-bottom:40px!important}
-  .noel-gauche{display:contents!important}
-  .noel-carte{order:3;margin-top:24px;max-width:none!important;flex:none!important}
-  .noel-boutons{order:4;margin-top:20px!important}
-  .noel-rassure{order:5}
+  main section{padding-block:0 10vh}
+  .slogan{padding-bottom:10vh}
+  .fond{background-position:100% bottom}
+  section.accueil{background:linear-gradient(180deg,rgba(58,6,24,.72),rgba(58,6,24,.55) 70%,rgba(58,6,24,0))}
+  .lueur{display:none}
+  section.accueil{align-items:flex-start;padding:48px 16px 40vh!important}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .intro,.lueur,.neige,.guirlande{display:none}
+  .carte,.bouton,.ligne{transition:none}
 }
 </style>
 <script type="application/ld+json">
@@ -464,38 +523,47 @@
 <main>
 
   <!-- Accueil de Noël. Après les fêtes : supprimer ce bloc et réactiver l'accueil habituel juste en dessous. -->
-  <div id="accueil" style="position: relative; overflow: hidden; background: #3E0915">
-  <img src="/images/noel-fond.webp" alt="" class="noel-photo" fetchpriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
-  <div class="noel-voile" style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(62,9,21,.97) 0%, rgba(62,9,21,.93) 48%, rgba(62,9,21,.4) 70%, rgba(62,9,21,.16) 100%)"></div>
-  <svg class="guirlande" viewBox="0 0 1440 76" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><path d="M0 4 Q60.0 62 120 4 Q180.0 62 240 4 Q300.0 62 360 4 Q420.0 62 480 4 Q540.0 62 600 4 Q660.0 62 720 4 Q780.0 62 840 4 Q900.0 62 960 4 Q1020.0 62 1080 4 Q1140.0 62 1200 4 Q1260.0 62 1320 4 Q1380.0 62 1440 4" fill="none" stroke="#B08960" stroke-width="1.2"></path><circle class="ampoule" cx="24" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -0.00s"></circle><circle class="ampoule" cx="60" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -0.37s"></circle><circle class="ampoule" cx="96" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -0.74s"></circle><circle class="ampoule" cx="144" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -1.11s"></circle><circle class="ampoule" cx="180" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -1.48s"></circle><circle class="ampoule" cx="216" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -1.85s"></circle><circle class="ampoule" cx="264" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -2.22s"></circle><circle class="ampoule" cx="300" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -0.19s"></circle><circle class="ampoule" cx="336" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -0.56s"></circle><circle class="ampoule" cx="384" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -0.93s"></circle><circle class="ampoule" cx="420" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -1.30s"></circle><circle class="ampoule" cx="456" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -1.67s"></circle><circle class="ampoule" cx="504" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -2.04s"></circle><circle class="ampoule" cx="540" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -0.01s"></circle><circle class="ampoule" cx="576" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -0.38s"></circle><circle class="ampoule" cx="624" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -0.75s"></circle><circle class="ampoule" cx="660" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -1.12s"></circle><circle class="ampoule" cx="696" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -1.49s"></circle><circle class="ampoule" cx="744" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -1.86s"></circle><circle class="ampoule" cx="780" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -2.23s"></circle><circle class="ampoule" cx="816" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -0.20s"></circle><circle class="ampoule" cx="864" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -0.57s"></circle><circle class="ampoule" cx="900" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -0.94s"></circle><circle class="ampoule" cx="936" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -1.31s"></circle><circle class="ampoule" cx="984" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -1.68s"></circle><circle class="ampoule" cx="1020" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -2.05s"></circle><circle class="ampoule" cx="1056" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -0.02s"></circle><circle class="ampoule" cx="1104" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -0.39s"></circle><circle class="ampoule" cx="1140" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -0.76s"></circle><circle class="ampoule" cx="1176" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -1.13s"></circle><circle class="ampoule" cx="1224" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -1.50s"></circle><circle class="ampoule" cx="1260" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -1.87s"></circle><circle class="ampoule" cx="1296" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -2.24s"></circle><circle class="ampoule" cx="1344" cy="27" r="4.5" fill="#FFD9A0" style="animation-delay: -0.21s"></circle><circle class="ampoule" cx="1380" cy="37" r="4.5" fill="#F5B7A8" style="animation-delay: -0.58s"></circle><circle class="ampoule" cx="1416" cy="27" r="4.5" fill="#FFF1DC" style="animation-delay: -0.95s"></circle></svg><div class="lueur" style="left: 58%; top: 8%; width: 170px; height: 170px; animation-delay: -0s"></div><div class="lueur" style="left: 72%; top: 58%; width: 120px; height: 120px; animation-delay: -1.5s"></div><div class="lueur" style="left: 92%; top: 44%; width: 190px; height: 190px; animation-delay: -3s"></div><div class="lueur" style="left: 84%; top: 78%; width: 140px; height: 140px; animation-delay: -2s"></div><div class="lueur" style="left: 6%; top: 70%; width: 110px; height: 110px; animation-delay: -4s"></div><div class="lueur" style="left: 38%; top: 82%; width: 90px; height: 90px; animation-delay: -2.6s"></div><div class="branche branche-g" style="width: 150px"><img src="/images/noel-branche.webp" alt="" style="display: block; width: 100%; height: auto"></div><div class="branche branche-d" style="width: 18vw; max-width: 280px"><img src="/images/noel-branche.webp" alt="" style="display: block; width: 100%; height: auto; transform: scaleX(-1)"></div><div class="neige neige-2"></div><div class="neige neige-1"></div>
-  <div class="noel-rangee" style="position: relative; max-width: 1080px; margin: 0 auto; padding: 140px 16px 72px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
-    <div class="noel-gauche" style="flex: 999 1 460px; min-width: 0; color: #FBF4F1">
-      <span style="display: block; font-size: 11px; line-height: 16px; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: #E9C4C4">Bienvenue dans les coulisses</span>
-      <h1 style="margin: 20px 0 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: clamp(36px, 4.4vw, 54px); line-height: 1.16; color: #FBF4F1">Cette année, offrez à votre entreprise une communication de Noël <em style="color: #E9C4C4">qui fait la différence.</em></h1>
-      <p style="margin: 22px 0 0; max-width: 500px; font-size: 18px; line-height: 1.6">Votre campagne de communication spéciale fêtes, pensée et créée autour de votre entreprise.</p>
-      <div class="noel-boutons" style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 14px">
-        <a href="#contact" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #FBF4F1; color: #5A0F20; text-decoration: none; font-size: 14px; font-weight: 400; letter-spacing: .06em">Je veux être visible</a>
-        <a href="#tarifs" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1px solid #E9C4C4; color: #FBF4F1; text-decoration: none; font-size: 14px; font-weight: 400; letter-spacing: .06em">Voir les tarifs</a>
-      </div>
-      <p class="noel-rassure" style="margin: 28px 0 0; font-size: 11px; line-height: 22px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: #E9C4C4">Community management • Création de contenus • Assistance digitale<br>À Nantes, en Loire-Atlantique et partout en France à distance</p>
+  <div class="fond" aria-hidden="true"><div class="lueur" style="left:38%;top:38%;width:7vw;height:7vw;animation-delay:-0.0s"></div><div class="lueur" style="left:55%;top:50%;width:9vw;height:9vw;animation-delay:-0.8s"></div><div class="lueur" style="left:72%;top:46%;width:8vw;height:8vw;animation-delay:-1.6s"></div><div class="lueur" style="left:46%;top:66%;width:5vw;height:5vw;animation-delay:-2.4s"></div><div class="lueur" style="left:67%;top:70%;width:6vw;height:6vw;animation-delay:-3.2s"></div><div class="lueur" style="left:60%;top:34%;width:4vw;height:4vw;animation-delay:-4.0s"></div><div class="lueur" style="left:82%;top:40%;width:4vw;height:4vw;animation-delay:-4.8s"></div><div class="lueur" style="left:30%;top:56%;width:4vw;height:4vw;animation-delay:-5.6s"></div><div class="lueur etincelle" style="left:96%;top:18%;width:16px;height:16px;animation-delay:-0.00s"></div><div class="lueur etincelle" style="left:94%;top:30%;width:22px;height:22px;animation-delay:-0.53s"></div><div class="lueur etincelle" style="left:98%;top:34%;width:14px;height:14px;animation-delay:-1.06s"></div><div class="lueur etincelle" style="left:92%;top:44%;width:24px;height:24px;animation-delay:-1.59s"></div><div class="lueur etincelle" style="left:96%;top:50%;width:18px;height:18px;animation-delay:-2.12s"></div><div class="lueur etincelle" style="left:90%;top:58%;width:20px;height:20px;animation-delay:-2.65s"></div><div class="lueur etincelle" style="left:93%;top:64%;width:26px;height:26px;animation-delay:-3.18s"></div><div class="lueur etincelle" style="left:97%;top:68%;width:16px;height:16px;animation-delay:-3.71s"></div><div class="lueur etincelle" style="left:88%;top:72%;width:18px;height:18px;animation-delay:-4.24s"></div><div class="lueur etincelle" style="left:92%;top:80%;width:22px;height:22px;animation-delay:-4.77s"></div><div class="lueur etincelle" style="left:96%;top:84%;width:18px;height:18px;animation-delay:-5.30s"></div><div class="lueur etincelle" style="left:98%;top:56%;width:18px;height:18px;animation-delay:-5.83s"></div><div class="lueur etincelle" style="left:90%;top:50%;width:12px;height:12px;animation-delay:-6.36s"></div><div class="lueur etincelle" style="left:95%;top:74%;width:14px;height:14px;animation-delay:-6.89s"></div></div>
+<svg class="guirlande" viewBox="0 0 1440 84" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><path d="M0 4 Q60 72 120 4 Q180 72 240 4 Q300 72 360 4 Q420 72 480 4 Q540 72 600 4 Q660 72 720 4 Q780 72 840 4 Q900 72 960 4 Q1020 72 1080 4 Q1140 72 1200 4 Q1260 72 1320 4 Q1380 72 1440 4" fill="none" stroke="#D9B27C" stroke-width="1.4"></path><circle class="ampoule" cx="24" cy="26" r="5.5" fill="#FFD9A0" style="animation-delay:-0.00s"></circle><circle class="ampoule" cx="60" cy="38" r="5.5" fill="#F5B7C8" style="animation-delay:-0.37s"></circle><circle class="ampoule" cx="96" cy="26" r="5.5" fill="#FFF1DC" style="animation-delay:-0.74s"></circle><circle class="ampoule" cx="144" cy="26" r="5.5" fill="#E8486F" style="animation-delay:-1.11s"></circle><circle class="ampoule" cx="180" cy="38" r="5.5" fill="#FFD9A0" style="animation-delay:-1.48s"></circle><circle class="ampoule" cx="216" cy="26" r="5.5" fill="#F5B7C8" style="animation-delay:-1.85s"></circle><circle class="ampoule" cx="264" cy="26" r="5.5" fill="#FFF1DC" style="animation-delay:-2.22s"></circle><circle class="ampoule" cx="300" cy="38" r="5.5" fill="#E8486F" style="animation-delay:-0.19s"></circle><circle class="ampoule" cx="336" cy="26" r="5.5" fill="#FFD9A0" style="animation-delay:-0.56s"></circle><circle class="ampoule" cx="384" cy="26" r="5.5" fill="#F5B7C8" style="animation-delay:-0.93s"></circle><circle class="ampoule" cx="420" cy="38" r="5.5" fill="#FFF1DC" style="animation-delay:-1.30s"></circle><circle class="ampoule" cx="456" cy="26" r="5.5" fill="#E8486F" style="animation-delay:-1.67s"></circle><circle class="ampoule" cx="504" cy="26" r="5.5" fill="#FFD9A0" style="animation-delay:-2.04s"></circle><circle class="ampoule" cx="540" cy="38" r="5.5" fill="#F5B7C8" style="animation-delay:-0.01s"></circle><circle class="ampoule" cx="576" cy="26" r="5.5" fill="#FFF1DC" style="animation-delay:-0.38s"></circle><circle class="ampoule" cx="624" cy="26" r="5.5" fill="#E8486F" style="animation-delay:-0.75s"></circle><circle class="ampoule" cx="660" cy="38" r="5.5" fill="#FFD9A0" style="animation-delay:-1.12s"></circle><circle class="ampoule" cx="696" cy="26" r="5.5" fill="#F5B7C8" style="animation-delay:-1.49s"></circle><circle class="ampoule" cx="744" cy="26" r="5.5" fill="#FFF1DC" style="animation-delay:-1.86s"></circle><circle class="ampoule" cx="780" cy="38" r="5.5" fill="#E8486F" style="animation-delay:-2.23s"></circle><circle class="ampoule" cx="816" cy="26" r="5.5" fill="#FFD9A0" style="animation-delay:-0.20s"></circle><circle class="ampoule" cx="864" cy="26" r="5.5" fill="#F5B7C8" style="animation-delay:-0.57s"></circle><circle class="ampoule" cx="900" cy="38" r="5.5" fill="#FFF1DC" style="animation-delay:-0.94s"></circle><circle class="ampoule" cx="936" cy="26" r="5.5" fill="#E8486F" style="animation-delay:-1.31s"></circle><circle class="ampoule" cx="984" cy="26" r="5.5" fill="#FFD9A0" style="animation-delay:-1.68s"></circle><circle class="ampoule" cx="1020" cy="38" r="5.5" fill="#F5B7C8" style="animation-delay:-2.05s"></circle><circle class="ampoule" cx="1056" cy="26" r="5.5" fill="#FFF1DC" style="animation-delay:-0.02s"></circle><circle class="ampoule" cx="1104" cy="26" r="5.5" fill="#E8486F" style="animation-delay:-0.39s"></circle><circle class="ampoule" cx="1140" cy="38" r="5.5" fill="#FFD9A0" style="animation-delay:-0.76s"></circle><circle class="ampoule" cx="1176" cy="26" r="5.5" fill="#F5B7C8" style="animation-delay:-1.13s"></circle><circle class="ampoule" cx="1224" cy="26" r="5.5" fill="#FFF1DC" style="animation-delay:-1.50s"></circle><circle class="ampoule" cx="1260" cy="38" r="5.5" fill="#E8486F" style="animation-delay:-1.87s"></circle><circle class="ampoule" cx="1296" cy="26" r="5.5" fill="#FFD9A0" style="animation-delay:-2.24s"></circle><circle class="ampoule" cx="1344" cy="26" r="5.5" fill="#F5B7C8" style="animation-delay:-0.21s"></circle><circle class="ampoule" cx="1380" cy="38" r="5.5" fill="#FFF1DC" style="animation-delay:-0.58s"></circle><circle class="ampoule" cx="1416" cy="26" r="5.5" fill="#E8486F" style="animation-delay:-0.95s"></circle></svg><div class="neige neige-2" aria-hidden="true"></div><div class="neige neige-1" aria-hidden="true"></div>
+<div class="intro" aria-hidden="true"><div class="i-ferme"></div><div class="i-ouvert"></div></div>
+  <script>
+    (function(){
+      document.body.classList.add('attente');
+      var n=0,go=function(){document.body.classList.remove('attente');};
+      ['images/noel-rideau-ferme.webp','images/noel-rideau-ouvert.webp'].forEach(function(u){var i=new Image();i.onload=i.onerror=function(){if(++n===2)go();};i.src=u;});
+      setTimeout(go,2500);
+    })();
+  </script>
+  <section class="accueil" id="accueil">
+  <div class="annonce">
+    <span class="petit-titre">Bienvenue dans les coulisses</span>
+    <h1>Cette année, offrez à votre entreprise une communication de Noël <em>qui fait la différence.</em></h1>
+    <p>Votre campagne de communication spéciale fêtes, pensée et créée autour de votre entreprise.</p>
+    <div class="actions">
+      <a class="bouton" href="#contact">Je veux être visible</a>
+      <a class="bouton leger" href="#tarifs">Voir les tarifs</a>
     </div>
+    <p class="rassure">Community management • Création de contenus • Assistance digitale<br>À Nantes, en Loire-Atlantique et partout en France à distance</p>
+  </div>
+</section>
 
-    <article class="flotte noel-carte" style="flex: 1 1 340px; max-width: 400px; box-sizing: border-box; padding: 32px; border-radius: 18px; background: #FBF4F1; box-shadow: 0 24px 60px rgba(30,4,10,.45)">
-      <span style="display: block; text-align: center; font-size: 11px; line-height: 16px; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: #7A4A52">Offre de Noël</span>
-      <h2 style="margin: 8px 0 0; text-align: center; font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 34px; line-height: 56px; color: #5A0F20">Pack <span style="font-family: Allura, cursive; font-weight: 400; font-size: 56px; color: #A8455A" class="mot">Noël</span></h2>
-      <p style="margin: 6px 0 0; text-align: center; font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 44px; line-height: 50px; color: #5A0F20">149 €<span style="font-size: 22px; vertical-align: super; line-height: 0">*</span></p>
-      <div style="margin: 20px 0 16px; height: 1px; background: #B08960"></div>
-      <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 22px">
-        <li style="display: flex; gap: 10px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A0F20" stroke-width="1.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>3 visuels et 3 textes</li>
-        <li style="display: flex; gap: 10px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A0F20" stroke-width="1.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>4 stories</li>
-        <li style="display: flex; gap: 10px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A0F20" stroke-width="1.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>1 campagne promotionnelle</li>
-        <li style="display: flex; gap: 10px; align-items: center; font-weight: 400; color: #5A0F20"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A0F20" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>1 bonus au choix offert</li>
+<section id="pack-noel">
+  <div class="contenu">
+    <article class="billet">
+      <span class="petit-titre">Offre de Noël</span>
+      <h2>Pack <span class="mot">Noël</span></h2>
+      <p class="montant">149 €*</p>
+      <ul>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>3 visuels et 3 textes</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>4 stories</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>1 campagne promotionnelle</li>
+        <li class="cadeau"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>1 bonus au choix offert</li>
       </ul>
-      <a class="reflet" href="pack-noel/" style="margin-top: 22px; display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 999px; background: #5A0F20; color: #FBF4F1; text-decoration: none; font-size: 14px; font-weight: 400; letter-spacing: .06em">Découvrir le Pack Noël</a>
-      <p style="margin: 12px 0 0; text-align: center; font-size: 12px; line-height: 18px; color: #7A4A52">* TVA non applicable, art. 293 B du CGI</p>
+      <a class="bouton" href="pack-noel/">Découvrir le Pack Noël</a>
+      <p class="aide">* TVA non applicable, art. 293 B du CGI</p>
     </article>
   </div>
-</div>
+</section>
 
   <!-- ACCUEIL HABITUEL, à réactiver après Noël
   <div class="scene" id="accueil-habituel">
@@ -646,6 +714,7 @@
       </div>
 
       <div class="encadre texte reveler">
+        <img class="photo-dos" src="images/derriere-le-rideau.webp" alt="Silhouette de dos à un bureau, près d'une lampe et d'un bouquet" loading="lazy">
         <span class="petit-titre">À propos</span>
         <h2>Derrière le rideau</h2>
         <p>Avant DL Digital Services, il y a quinze ans d'accompagnement humain.</p>
