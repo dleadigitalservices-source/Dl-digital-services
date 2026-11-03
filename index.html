@@ -343,6 +343,7 @@ header{background:#3A0618;border-bottom-color:rgba(235,199,146,.5)}
 .menu .bouton:hover{background:#F7D3D3}
 .menu a[href*=pack-noel]{color:#FFF5EC!important}
 .fond{position:fixed;inset:0;z-index:0;overflow:hidden;background:#3A0618 url(images/noel-fond-site.webp) center bottom/cover no-repeat}
+@media (max-aspect-ratio:1/1){.fond{background-image:url(images/noel-fond-tel.webp)}.lueur{display:none}}
 .lueur{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,196,150,.8) 0%,rgba(255,170,130,.28) 45%,transparent 70%);animation:scintille 5s ease-in-out infinite}
 .etincelle{background:radial-gradient(circle,#fff 0%,rgba(255,226,170,.9) 30%,rgba(255,200,130,.25) 55%,transparent 72%);animation-duration:2.8s}
 .neige{position:fixed;left:-60px;right:-60px;bottom:0;height:calc(100vh + 700px);z-index:15;pointer-events:none;background-repeat:repeat;will-change:transform}
@@ -422,7 +423,6 @@ body.attente .intro,body.attente .lumiere,body.attente .cote,body.attente .pli,b
 @media (max-width:760px){
   main section{padding-block:0 10vh}
   .slogan{padding-bottom:10vh}
-  .fond{background-position:100% bottom}
   section.accueil{background:linear-gradient(180deg,rgba(58,6,24,.72),rgba(58,6,24,.55) 70%,rgba(58,6,24,0))}
   .lueur{display:none}
   section.accueil{align-items:flex-start;padding:48px 16px 40vh!important}
